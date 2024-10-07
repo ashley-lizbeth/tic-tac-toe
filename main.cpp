@@ -13,12 +13,19 @@
 bool DEBUG_MODE = false;
 int move_count = 1;
 
-bool has_anyone_won(Moves *moves) {
+bool has_game_ended(CellScores *cell_scores, Moves *moves) {
   for (auto s : moves->scores) {
     if (abs(s) == 3)
       return true;
   }
-  return false;
+
+  for (auto f : cell_scores->field) {
+    for (auto cs : f)
+      if (cs != CELL_OCCUPIED)
+        return false;
+  }
+
+  return true;
 }
 
 bool player_turn(Board *board) {
@@ -63,7 +70,7 @@ int main() {
 
   does_machine_play = tolower(goes_first_string[0]) != 'y';
 
-  while (!has_anyone_won(&move_scores)) {
+  while (!has_game_ended(&cell_scores, &move_scores)) {
     if (does_machine_play) {
       machine_turn(&board, &cell_scores);
       does_machine_play = false;
