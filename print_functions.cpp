@@ -5,9 +5,13 @@
 #include "print_functions.h"
 
 Coordinates capture_and_translate_enemy_move(Board *board) {
+  std::cout << "Your move: ";
+
   std::string enemy_move;
   std::cin >> enemy_move;
   int col, row;
+
+  std::cout << std::endl;
 
   if (enemy_move == "debug") {
     return {-2, -2};

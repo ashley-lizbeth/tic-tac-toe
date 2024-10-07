@@ -57,9 +57,9 @@ int main() {
 
   std::string goes_first_string;
   std::cout << "Do you wish to go first? ";
-  std::flush(std::cout);
-
   std::cin >> goes_first_string;
+
+  std::cout << std::endl;
 
   does_machine_play = tolower(goes_first_string[0]) != 'y';
 
