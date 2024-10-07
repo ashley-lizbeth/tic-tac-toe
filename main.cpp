@@ -13,9 +13,7 @@
 int move_count = 1;
 
 bool has_anyone_won(Moves *moves) {
-  std::cout << "one";
   for (auto s : moves->scores) {
-    std::cout << s << " ";
     if (abs(s) == 3)
       return true;
   }
@@ -45,9 +43,9 @@ void machine_turn(Board *board, CellScores *cell_scores) {
 int main() {
   std::ios_base::sync_with_stdio(0);
 
-  Board *board;
-  CellScores *cell_scores;
-  Moves *move_scores;
+  Board board;
+  CellScores cell_scores;
+  Moves move_scores;
 
   bool does_machine_play = false;
 
@@ -59,18 +57,15 @@ int main() {
 
   does_machine_play = tolower(goes_first_string[0]) != 'y';
 
-  std::cout << does_machine_play;
-  std::cout << std::endl;
-
-  while (!has_anyone_won(move_scores)) {
-    std::cout << "yo";
+  while (!has_anyone_won(&move_scores)) {
     if (does_machine_play) {
-      machine_turn(board, cell_scores);
+      machine_turn(&board, &cell_scores);
+      does_machine_play = false;
     } else {
-      does_machine_play = player_turn(board);
+      does_machine_play = player_turn(&board);
     }
 
-    calculate_move_scores(board, move_scores);
-    update_cell_scores(board, cell_scores, move_scores);
+    calculate_move_scores(&board, &move_scores);
+    update_cell_scores(&board, &cell_scores, &move_scores);
   }
 }
