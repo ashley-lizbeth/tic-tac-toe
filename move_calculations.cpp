@@ -31,6 +31,8 @@ void boost_almost_wins(Moves *moves) {
 }
 
 void calculate_move_scores(Board *board, Moves *moves) {
+  moves->reset();
+
   for (int col = 0; col < 3; col++) {
     for (int row = 0; row < 3; row++) {
       int cell_value = get_cell_value(board, {col, row});

@@ -13,6 +13,7 @@ struct Moves {
 
   int size() const { return scores.size(); }
   int at(int x) { return scores[x]; }
+  void reset() { scores.fill(0); }
 };
 
 void calculate_move_scores(Board *board, Moves *moves);
