@@ -6,7 +6,9 @@ const std::array<std::array<int, 3>, 3> INITIAL_CELL_SCORES = {3, 2, 3, 2, 4,
                                                                2, 3, 2, 3};
 
 struct CellScores {
-  std::array<std::array<int, 3>, 3> field = INITIAL_CELL_SCORES;
+  std::array<std::array<int, 3>, 3> field;
+
+  CellScores() : field(INITIAL_CELL_SCORES){};
 
   char at(Coordinates coords) { return field.at(coords.column).at(coords.row); }
 

@@ -9,6 +9,8 @@
 struct Moves {
   std::array<int, 8> scores;
 
+  Moves() { scores.fill(0); }
+
   int size() const { return scores.size(); }
   int at(int x) { return scores[x]; }
 };
