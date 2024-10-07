@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ostream>
 #include <string>
 
 #include "print_functions.h"
@@ -7,6 +8,10 @@ Coordinates capture_and_translate_enemy_move(Board *board) {
   std::string enemy_move;
   std::cin >> enemy_move;
   int col, row;
+
+  if (enemy_move == "debug") {
+    return {-2, -2};
+  }
 
   switch (toupper(enemy_move[0])) {
   case 'A':
@@ -68,4 +73,18 @@ void print_board(Board *board, int move_count) {
     std::cout << "\n";
   }
   std::cout << "\n";
+}
+
+void print_debug_info(CellScores *cell_scores, Moves *move_scores) {
+  std::cout << "Move scores: ";
+  for (auto ms : move_scores->scores) {
+    std::cout << ms << " ";
+  }
+  std::cout << std::endl << "\nCell scores: " << std::endl;
+  for (auto f : cell_scores->field) {
+    for (auto cs : f) {
+      std::cout << cs << " ";
+    }
+    std::cout << std::endl;
+  }
 }

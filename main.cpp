@@ -10,6 +10,7 @@
 #include "move_calculations.h"
 #include "print_functions.h"
 
+bool DEBUG_MODE = false;
 int move_count = 1;
 
 bool has_anyone_won(Moves *moves) {
@@ -22,6 +23,11 @@ bool has_anyone_won(Moves *moves) {
 
 bool player_turn(Board *board) {
   Coordinates enemy_cell = capture_and_translate_enemy_move(board);
+
+  if (enemy_cell == Coordinates(-2, -2)) {
+    DEBUG_MODE = !DEBUG_MODE;
+    return false;
+  }
 
   if (enemy_cell == Coordinates(-1, -1)) {
     return false;
@@ -67,5 +73,8 @@ int main() {
 
     calculate_move_scores(&board, &move_scores);
     update_cell_scores(&board, &cell_scores, &move_scores);
+
+    if (DEBUG_MODE)
+      print_debug_info(&cell_scores, &move_scores);
   }
 }
